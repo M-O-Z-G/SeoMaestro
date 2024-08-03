@@ -178,6 +178,13 @@ class PageFieldValue extends WireData
         $tags = [];
         $field = $this->getFieldInCurrentContext();
 
+        if ($field->get('webmaster_tools_baidu_code')) {
+            $tags['webmaster_tools_baidu_code'] = sprintf(
+                '<meta name="baidu-site-verification" content="%s">',
+                $this->wire('sanitizer')->entities($field->get('webmaster_tools_baidu_code'))
+            );
+        }
+
         if ($field->get('webmaster_tools_google_code')) {
             $tags['webmaster_tools_google_code'] = sprintf(
                 '<meta name="google-site-verification" content="%s">',
@@ -189,6 +196,13 @@ class PageFieldValue extends WireData
             $tags['webmaster_tools_bing_code'] = sprintf(
                 '<meta name="msvalidate.01" content="%s">',
                 $this->wire('sanitizer')->entities($field->get('webmaster_tools_bing_code'))
+            );
+        }
+
+        if ($field->get('webmaster_tools_yandex_code')) {
+            $tags['webmaster_tools_yandex_code'] = sprintf(
+                '<meta name="yandex-verification" content="%s">',
+                $this->wire('sanitizer')->entities($field->get('webmaster_tools_yandex_code'))
             );
         }
 

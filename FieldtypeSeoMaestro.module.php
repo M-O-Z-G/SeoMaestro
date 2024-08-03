@@ -15,7 +15,7 @@ class FieldtypeSeoMaestro extends Fieldtype implements Module
         return [
             'title' => 'Seo Maestro',
             'summary' => 'A fieldtype storing various meta tags (meta, opengraph, twitter etc.) and sitemap behaviour for pages.',
-            'version' => '1.1.1',
+            'version' => '1.1.1.1',
             'author' => 'Stefan Wanzenried (Wanze)',
             'installs' => 'InputfieldSeoMaestro',
             'requires' => [
@@ -291,6 +291,13 @@ class FieldtypeSeoMaestro extends Fieldtype implements Module
         $webmasterTools->collapsed = Inputfield::collapsedYes;
         $webmasterTools->attr('name', 'webmaster_tools');
 
+        $baidu = $this->wire('modules')->get('InputfieldText');
+        $baidu->attr('name', 'webmaster_tools_baidu_code');
+        $baidu->attr('value', $values['webmaster_tools_baidu_code'] ?? '');
+        $baidu->label = $this->_('Baidu Verification Code');
+        $baidu->description = $this->_('Get your Baidu verification code in the [baidu Webmaster Tools](https://ziyuan.baidu.com/site).');
+        $webmasterTools->append($baidu);
+
         $google = $this->wire('modules')->get('InputfieldText');
         $google->attr('name', 'webmaster_tools_google_code');
         $google->attr('value', $values['webmaster_tools_google_code'] ?? '');
@@ -304,6 +311,13 @@ class FieldtypeSeoMaestro extends Fieldtype implements Module
         $bing->label = $this->_('Bing Verification Code');
         $bing->description = $this->_('Get your Bing verification code in the [Bing Webmaster Tools](https://www.bing.com/toolbox/webmaster).');
         $webmasterTools->append($bing);
+
+        $yandex = $this->wire('modules')->get('InputfieldText');
+        $yandex->attr('name', 'webmaster_tools_yandex_code');
+        $yandex->attr('value', $values['webmaster_tools_yandex_code'] ?? '');
+        $yandex->label = $this->_('Yandex Verification Code');
+        $yandex->description = $this->_('Get your Yandex verification code in the [Yandex Webmaster Tools](https://webmaster.yandex.com/sites/add).');
+        $webmasterTools->append($yandex);
 
         $wrapper->append($webmasterTools);
 
